@@ -1,0 +1,9 @@
+# IB 2nd variables notes
+# ex:
+stdents_count= 29
+amount_water = "1oz"
+name = "Jake"
+#grade = 98
+grade = grade- 10
+print(grade)
+print(grade)

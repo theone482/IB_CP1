@@ -1,0 +1,9 @@
+price_apple = 0.99
+price_bread = 2.50
+price_milk = 3.25
+
+qty_apple = 4
+qty_bread = 2
+qty_milk = 1
+
+subtotal = (price_apple * qty_apple) + (price_bread * qty_bread) + (price_milk * qty_milk)

@@ -1,0 +1,11 @@
+# IB 2ND Grade Averag
+period_1 = input("hey what is your grade in your first period: ")
+period_2 = input("what is your grade in second period: ")
+period_3 = input("what is your grade")
+period_4 = input("My grade is ok with this class. so what is youe grade in csp: ")
+period_5 = input("What is your grade in your 5th period class?: ")
+period_6 = input("My grade is ok with this class. so what is youe grade in csp")
+period_7 = input("what is your grade in your seventh period")
+grade_avarge = float((period_1 + period_2 + period_3 + period_4 + period_5 + period_6 + period_7)\5)
+grade_avarge = round(grade_avarge, 2)
+print("your grade average is", grade_avarge )

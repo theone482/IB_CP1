@@ -1,6 +1,4 @@
-# IB 2ND inters anf float notes
-#ukgvkuygvuyhbvghgh
-
+# IB 2ND inters anf float notes 
 
 # interger
 age = 65496499999999999999999

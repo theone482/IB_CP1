@@ -1,2 +1,4 @@
 # IB 2ND FOR FUN
-
+my_string = "path/to/file"
+new_string = my_string.replace("/", "")
+print(new_string)

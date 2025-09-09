@@ -9,3 +9,4 @@ color_two = input()
 print(color_two)
 
 #pick 1 method, do not change between them
+print('test')

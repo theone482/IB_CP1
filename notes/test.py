@@ -10,3 +10,6 @@ print(color_two)
 
 #pick 1 method, do not change between them
 print('test')
+print("update")
+print("practice sync and homework")
+print("Iadd yhid on codespaces. That place where i can do homework!")

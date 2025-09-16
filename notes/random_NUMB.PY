@@ -5,7 +5,6 @@ import random
 print(random.random()) # float between 0 and 1
 print(random.randint(1, 100)) 
 
-
 name = input("what is your name: \n").strip().title()
 
 #random stat creater D&D

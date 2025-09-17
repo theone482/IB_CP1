@@ -1,16 +1,16 @@
 # IB 2nd crew shares 
-
-total_earnings = float(input("How much money was earned in total? "))
-crew_members = int(input("How many crew members are there (excluding captain and first mate)? "))
-
-captain_share = total_earnings * 0.25 # Captain gets 25%
-first_mate_share = total_earnings * 0.15 # First mate gets 15%
-
-remaining_money = total_earnings - captain_share - first_mate_share
-
-if crew_members > 0:
-crew_share = remaining_money / crew_members
-else:
-crew_share = 0 # No crew to share with
+def calculate_shares(total_earnings, crew_count):
+    total_shares = 7 + 3 + crew_count
+    share_value = total_earnings / total_shares
+    captain_earnings = 7 * share_value
+    first_mate_earnings = 3 * share_value
+    crew_total_share = share_value
+    crew_remaining = crew_total_share - 500
+    print(f"How much was earned: ${total_earnings:,.2f}")
+    print(f"How many crew members are there (not including the captain and first mate): {crew_count}")
+    print(f"The captain gets: ${captain_earnings:,.2f}")
+    print(f"The first mate gets: ${first_mate_earnings:,.2f}")
+    print(f"Crew still needs: ${crew_remaining:,.2f}")
+calculate_shares(50000.00, 30)
 
 

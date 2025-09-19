@@ -15,3 +15,11 @@ print("practice sync and homework")
 print("I added this on codespaces. That place where I can do homework!")
 print("new seat 9/17")
 print("hey")
+num = float(input("enter a number: "))
+
+if num>0:
+    print(f"the number {num} is positive.")
+elif num < 0: 
+    print(f"the number {num} id negative.")
+else:
+    print(f"the number {num} is zero.")

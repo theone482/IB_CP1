@@ -1,18 +1,22 @@
 # IB 2nd user sign in
+username = "theone482"
+password = "300587"
+username2 = input("What is your username: ")
+password2 = input("What is the password to your username:")
 
-username = input("What is your username: ")
-password = input("What is the password to your username:")
-
-if username == "theone482": 
-    print(f"hey that is not your it is mine")
-elif username == username:
-    print(f"welcome {username}")
+if username2 == username: 
+    print(f"{username} is right ")
 else:
-    print("what. this shouldn't happened")
+    print(f"nope wrong username. try again")
 
-if password == password:
-    print(f"So {password} is your password, thanks for giving me your password.")
+if password2 == password:
+    print(f"{password} is correct. ")
 elif password == "000":
-    print(f"maybe you should change your password it is too easy.")
+    print(f"Did you forget your password?. try again")
 else:
-    print("whattt. This sholdn't have happened.")
+    print("worng password try again.")
+
+if username == username2 and password == password2:
+    print("you are signed in")
+else:
+    print("you didn't get in try again")

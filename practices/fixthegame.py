@@ -6,7 +6,7 @@ def start_game():
     print("I'm thinking of a number between 1 and 100.")
     number_to_guess = random.randint(1, 100)
     max_attempts = 10
-    attempts = 0
+    attempts = 1
     game_over = False
     while not game_over:
         guess = input("Enter your guess: ")

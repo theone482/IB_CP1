@@ -6,24 +6,22 @@ while True:
         choice = input("what is your choice: ")
         
         if choice == "1" :
-            action = input("what is your task you want to add:")
-            shoplist.append(action)
-            print(f"{action} added")
+            task = input("what is your task you want to add:")
+            shoplist.append(task)
+            print(f"{task} added")
             print(f"shopping list= {shoplist}")
         elif choice == 2: 
-            action = input("enter task to remove: ")
-        if action in shoplist:
-                shoplist.remove(action)
-                print(f"'{action} remove")
-            else:
-                 print(f"task not found.")
-        elif choice == "3":
-                if shoplist:
-                  for i, action in enumerate(shoplist, 1):
-                       print(f"{i}. {action}")
-                        else:
-                             print("list is empty")
+            task = input("enter task to remove: ")
+        if task in shoplist:
+            shoplist.remove(task)
+            print(f"'{task} remove")
+        else:
+            print(f"task not found.")
+        if choice == "3":
+          if shoplist:
+               for i, task in enumerate(shoplist, 1):
+                       print(f"{i}. {task}")
+        else:
+            print("list is empty")
         if choice == "4":
             break
-                else:
-                     print("try again")

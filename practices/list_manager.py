@@ -12,18 +12,18 @@ while True:
             print(f"shopping list= {shoplist}")
         elif choice == 2: 
             action = input("enter task to remove: ")
-            if action in shoplist:
-                 shoplist.remove(action)
-                 print(f"'{action} remove")
+        if action in shoplist:
+                shoplist.remove(action)
+                print(f"'{action} remove")
             else:
                  print(f"task not found.")
         elif choice == "3":
-             if shoplist:
+                if shoplist:
                   for i, action in enumerate(shoplist, 1):
                        print(f"{i}. {action}")
-        else:
-             print("list is empty")
+                        else:
+                             print("list is empty")
         if choice == "4":
             break
-        else:
-             print("try again")
+                else:
+                     print("try again")

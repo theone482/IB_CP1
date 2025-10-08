@@ -13,24 +13,24 @@ while True:
         print("Tie try again")
     elif ai == 2 and player == "1":
         print("The Computer won")
-        aiwons += 1
+        aiwons + 1
     elif ai == 3 and player == "1":
         print("You won")
-        playerwons+= 1
+        playerwons + 1
     elif ai == 1 and player == "2":
         print("You won")
-        playerwons+= 1
+        playerwons += 1
     elif ai == 2 and player == "2":
         print("Tie try again")
     elif ai == 3 and player == "2":
         print("The computer won")
-        aiwons+= 1
+        aiwons + 1
     elif ai == 1 and player == "3":
         print("the computer won")
-        aiwons.append()
+        aiwons + 1
     elif ai == 2 and player == "3":
         print("you won")
-        playerwons.append()
+        playerwons + 1
     elif ai == 3 and player == "3":
         print("Tie try again")
     if player == "5":

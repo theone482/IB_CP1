@@ -34,5 +34,5 @@ while True:
         print("You won!")
         playerwons += 1
     else:
-        print("💻 The computer won.")
+        print(" The computer won.")
         aiwons += 1

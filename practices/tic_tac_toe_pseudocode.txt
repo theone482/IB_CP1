@@ -1,0 +1,80 @@
+# IB 2nd tic tac toe pseudocode program
+import random
+aiwins=0
+playerwons=0
+board = [[1,2,3],
+        [4,5,6],
+        [7,8,9]]
+
+while true:
+    print(ten is to show wins)
+    ask the player where they will put their mark on the table
+    make the computer pick a number from 1 to 9
+
+    #if the player and the computer picked the same number make the computer to pick a different number
+    if not contuine
+
+    print what number the player and the computer picked and make the number of the player pick have a 0
+    and the computer number have a X
+
+    if 1,5,9 are picked by X
+        print("computer won)
+        playgain = input ("do you want to play again)
+        aiwons += 1
+    elif 1,5,9 are picked by 0:
+        print("you won)
+        playgain = input ("do you want to play again)
+        playerwons += 1
+    elif 2,5,8 are picked by X
+        print("computer won)
+        playgain = input ("do you want to play again)
+        aiwons += 1
+    elif 2,5,8 are picked by 0
+        print("you won)
+        playgain = input ("do you want to play again)
+        playerwons += 1
+    elif 3,5,7 are picked by X
+        print("computer won)
+        playgain = input ("do you want to play again)
+        aiwons += 1
+    elif 3,5,7 are picked by 0
+        print("you won)
+        playgain = input ("do you want to play again)
+        playerwons += 1
+    elif 1,4,7 are picked by X
+        print("computer won)
+        playgain = input ("do you want to play again)
+        aiwons += 1
+    elif 1,4,7 are picked by 0
+        print("you won)
+        playgain = input ("do you want to play again)
+        playerwons += 1
+    elif 1,2,3 are picked by X
+        print("computer won)
+        playgain = input ("do you want to play again)
+        aiwons += 1
+    elif 1,2,3 are picked by 0
+        print("you won)
+        playgain = input ("do you want to play again)
+        playerwons += 1
+    elif 4,5,6 are picked by X
+        print("computer won)
+        playgain = input ("do you want to play again)
+        aiwons += 1
+    elif 4,5,6 are picked by 0
+        print("you won)
+        playgain = input ("do you want to play again)
+        playerwons += 1
+    elif 7,8,9 are picked by X
+        print("computer won)
+        playgain = input ("do you want to play again)
+        aiwons += 1
+    elif 7,8,9 are picked by 0
+        print("you won)
+        playgain = input ("do you want to play again)
+        playerwons += 1
+
+    if playgain == "no"
+        PRINT("THANKS FOR playing)
+        break
+    

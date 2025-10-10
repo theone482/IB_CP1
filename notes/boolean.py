@@ -44,11 +44,11 @@ print(f"My hour variable is a string: {isinstance(hour, str)}")
 print(f"My hour variable is a integer: {isinstance(hour, int)}")
 print(f"My hour variable is a float: {isinstance(hour, float)}")
 
-now2 = date.datetime.today()
-current_hour = now.hour()
+#now2 = date.datetime.today()
+#current_hour = now.hour()
 
-print(f"current time according to datetime: {now2}") #doesn't give you the day of the week
-print(f"Hour: {current_hour}") #it gives you just the hour
-print(f"My hour variable is a string: {isinstance(current_hour, str)}")
-print(f"My hour variable is a integer: {isinstance(current_hour, int)}")
-print(f"My hour variable is a float: {isinstance(current_hour, float)}")
+#print(f"current time according to datetime: {now2}") #doesn't give you the day of the week
+#print(f"Hour: {current_hour}") #it gives you just the hour
+#print(f"My hour variable is a string: {isinstance(current_hour, str)}")
+#print(f"My hour variable is a integer: {isinstance(current_hour, int)}")
+#print(f"My hour variable is a float: {isinstance(current_hour, float)}")

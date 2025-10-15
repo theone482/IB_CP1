@@ -1,4 +1,5 @@
 # IB 2nd password strength checker
+import string
 # tell them the reciermemnctes for password
 print("make a psssword that 1.Has 8 characters\t 2. Has at least one lowercase\t 3. Has one uppercase\t 4. Has at lest one number\t 5.Has one special character\t")
 score_strength = 0
@@ -6,34 +7,35 @@ score_strength = 0
 password = input("please write you password here: ")
 #if password== len 8 print you go the length right
 if len(password) >= 8:
-    print("good job you got 8 or more character in your password")
+    print("Good job! Your password has 8 or more characters.")
     score_strength += 1
 else:
-    print("you should put more characters")
+    print("Your password should have at least 8 characters.")
 #if password has uppercase letter print you have uppercode good
-if password >= "A" and password <= "Z":
-    print("your password had a uppercase good")
+if any(char.isupper() for char in password):
+    print("Your password contains an uppercase letter.")
     score_strength += 1
 else:
-    print("you should put a uppercase in your password")
+    print("Add at least one uppercase letter.")
 # if password has under case print you have lower csae
-if password <= "a" and password <="z":
-    print("You have a lowercase good job")
+if any(char.islower() for char in password):
+    print("Your password contains a lowercase letter.")
     score_strength += 1
 else:
-    print("put a lowercase letter")
+    print("Add at least one lowercase letter.")
 # if password has nunber print good job you have number in it
-if password >= "0":
-    print("you have a number great")
+if any(char.isdigit() for char in password):
+    print("Your password contains a number.")
     score_strength += 1
 else:
-    print("you don't have a a number")
+    print("Add at least one number.")
 # if password has special character then print you got it
-if password >= ("!@#$%^&*()_-+,=[]`~;<>?."):
-    print("you have a special caracter good.")
+special_characters = string.punctuation
+if any(char in special_characters for char in password):
+    print("Your password contains a special character.")
     score_strength += 1
 else:
-    print("you should put a special characters")
+    print("Add at least one special character.")
 # if password has all five print your password is very strong 5/5
 # # if not print how many you got right 
 if score_strength == 5:

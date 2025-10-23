@@ -1,7 +1,7 @@
 # IB 2nd password strength checker
 import string
 # tell them the reciermemnctes for password
-print("make a psssword that 1.Has 8 characters\t 2. Has at least one lowercase\t 3. Has one uppercase\t 4. Has at lest one number\t 5.Has one special character\t")
+print("make a password that 1.Has 8 characters\t 2. Has at least one lowercase\t 3. Has one uppercase\t 4. Has at lest one number\t 5.Has one special character\t")
 score_strength = 0
 #make a input called password
 password = input("please write you password here: ")

@@ -23,6 +23,7 @@ t1.shape("turtle")
 t1.teleport(-450,0)
 t1.color("green")
 
+
 t3 = turtle.Turtle()
 t3.shape("turtle")
 t3.teleport(-450,200)
@@ -33,6 +34,7 @@ t2.shape("turtle")
 t2.teleport(-450,100)
 t2.color("pink")
 
+
 t4 = turtle.Turtle()
 t4.shape("turtle")
 t4.teleport(-450,-100)
@@ -42,8 +44,23 @@ t5 = turtle.Turtle()
 t5.shape("turtle")
 t5.teleport(-450,-200)
 t5.color("purple")
+
 while True:
     t5.forward(random.randint(1,10))
-    
+    t4.forward(random.randint(1,10))
+    t3.forward(random.randint(1,10))
+    t2.forward(random.randint(1,10))
+    t1.forward(random.randint(1,10))
+    if t1.setx(450):
+        print("green turtle won")
+    elif t2.setx(450):
+        print("pink turtle won")
+    elif t3.setx(450):
+        print("blue turtle won")
+    elif t4.setx(450):
+        print("red turtle won")
+    elif t5.setx(450):
+       print("purple turtle won")
+       break
 # make thgeme different colors
 turtle.done()

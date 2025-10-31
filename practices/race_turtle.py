@@ -1,66 +1,68 @@
-#Iv 2nd race turtle
+# Iv, 2nd period, Turtle Race
+
 import turtle
 import random
-# make the finish line
-turtle.color("white")
-turtle.forward(300)
-turtle.color("black")
-turtle.left(90)
-turtle.forward(450)
-turtle.right(180)
-turtle.forward(800)
-turtle.penup()
-turtle.goto(-450,0)
-turtle.color("white")
-turtle.pendown
 
-screen = turtle.Screen()
-screen.setup()
-screen.title("turtle race")
-# make five turtle
-t1 = turtle.Turtle()
-t1.shape("turtle")
-t1.teleport(-450,0)
-t1.color("green")
+# --- Function to set up the race ---
+def setup_race():
+    screen = turtle.Screen()
+    screen.setup(width=1000, height=600)
+    screen.title("Turtle Race")
 
+    # Draw finish line
+    line = turtle.Turtle()
+    line.hideturtle()
+    line.speed(0)
+    line.penup()
+    line.goto(450, 250)
+    line.right(90)
+    line.pendown()
+    line.pensize(3)
+    line.forward(500)
 
-t3 = turtle.Turtle()
-t3.shape("turtle")
-t3.teleport(-450,200)
-t3.color("blue")
+    # Create turtles
+    colors = ["green", "pink", "blue", "red", "purple"]
+    positions = [0, 100, 200, -100, -200]
+    turtles = []
 
-t2 = turtle.Turtle()
-t2.shape("turtle")
-t2.teleport(-450,100)
-t2.color("pink")
+    for color, y in zip(colors, positions):
+        racer = turtle.Turtle(shape="turtle")
+        racer.color(color)
+        racer.penup()
+        racer.goto(-450, y)
+        turtles.append(racer)
 
+    return screen, turtles
 
-t4 = turtle.Turtle()
-t4.shape("turtle")
-t4.teleport(-450,-100)
-t4.color("red")
+# --- Function to run the race ---
+def race(turtles):
+    winner = None
+    while not winner:
+        for racer in turtles:
+            racer.forward(random.randint(1, 10))
+            if racer.xcor() >= 450:   # finish line check
+                winner = racer
+                break
+    return winner
 
-t5 = turtle.Turtle()
-t5.shape("turtle")
-t5.teleport(-450,-200)
-t5.color("purple")
+# --- Function to announce the winner ---
+def announce_winner(winner):
+    color = winner.color()[0].capitalize()
+    print(f"{color} turtle won!")
 
-while True:
-    t5.forward(random.randint(1,10))
-    t4.forward(random.randint(1,10))
-    t3.forward(random.randint(1,10))
-    t2.forward(random.randint(1,10))
-    t1.forward(random.randint(1,10))
-    if t1.setx(450):
-        print("green turtle won")
-    elif t2.setx(450):
-        print("pink turtle won")
-    elif t3.setx(450):
-        print("blue turtle won")
-    elif t4.setx(450):
-        print("red turtle won")
-    elif t5.setx(450):
-       print("purple turtle won")
-       break
-# make thgeme different colors
-turtle.done()
+    announcer = turtle.Turtle()
+    announcer.hideturtle()
+    announcer.penup()
+    announcer.goto(0, 0)
+    announcer.write(f"{color} turtle wins!",
+                    align="center", font=("Arial", 24, "bold"))
+
+# --- Main program ---
+def main():
+    screen, turtles = setup_race()
+    winner = race(turtles)
+    announce_winner(winner)
+    screen.mainloop()
+
+if __name__ == "__main__":
+    main()

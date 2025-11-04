@@ -1,2 +1,0 @@
-
-    turtle.right(90)

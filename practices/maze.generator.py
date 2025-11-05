@@ -1,53 +1,24 @@
 # IB 2nd maze generator
 import turtle
 import random
-grid_rows = [[random.randint(0,1),0],[random.randint[(0,1)],0],[random.randint[(0,1),0],[random.randint[(0,1)],0],[random.randint[(0,1)],0],[random.randint[(0,1)],0],]
-              [[random.randint[(0,1)],1],[random.randint[(0,1)],1],[random.randint[(0,1)],1],[random.randint[(0,1)]],1,[random.randint[(0,1)],1],[random.randint[(0,1)],1],]
-              [[random.randint[(0,1)],2],[random.randint[(0,1)],2],[random.randint[(0,1)],2],[random.randint[(0,1)],2],[random.randint[(0,1)],2],[random.randint[(0,1)],2],]
-              [[random.randint[(0,1)],3],[random.randint[(0,1)],3],[random.randint[(0,1)],3],[random.randint[(0,1)]],3,[random.randint[(0,1)],3],[random.randint[(0,1)],3],]
-              [[random.randint[(0,1)]],4,[random.randint[(0,1)],4],[random.randint[(0,1)],4],[random.randint[(0,1)],4],[random.randint[(0,1)]],4,[random.randint[(0,1)],4],]
-              [[random.randint[(0,1)],5],[random.randint[(0,1)],5],[random.randint[(0,1)]],5,[random.randint[(0,1)],5],[random.randint[(0,1)],5],[random.randint[((0,1),5)],]]]
+# what rows and grids ARE
+#grid_rows 
 
 
+#grid_columns 
 
-
-grid_columns = [[random.randint[(0,1)],random.randint[(0,1)],random.randint[(0,1)],random.randint[(0,1)],random.randint[(0,1)],random.randint[(0,1)],]
-                [random.randint[(0,1)],random.randint[(0,1)],random.randint[(0,1)],random.randint[(0,1)],random.randint[(0,1)],random.randint[(0,1)],]
-                [random.randint[(0,1)],random.randint[(0,1)],random.randint[(0,1)],random.randint[(0,1)],random.randint[(0,1)],random.randint[(0,1)],]
-                [random.randint[(0,1)],random.randint[(0,1)],random.randint[(0,1)],random.randint[(0,1)],random.randint[(0,1)],random.randint[(0,1)],]
-                [random.randint[(0,1)],random.randint[(0,1)],random.randint[(0,1)],random.randint[(0,1)],random.randint[(0,1)],random.randint[(0,1)],]
-                [random.randint[(0,1)],random.randint[(0,1)],random.randint[(0,1)],random.randint[(0,1)],random.randint[(0,1)],random.randint[(0,1)],]]
+#the siez of the maze
 def steup_maze():
     screen = turtle.Screen()
-    screen.setup(row_grid=6, col_grid=6)
+    screen.setup()
     screen.title("Maze generator")
-
-def walls(grid_rows, grid_columns):
+#how to make the Walls
+def walls():
     turtle.pensize(20)
     turtle.color("black")
-
-    while True:
-        if 1 in grid_columns:
-            turtle.pendown
-            turtle.forward(10)
-        elif 0 in grid_columns:
-            turtle.penup
-            turtle.forward(10)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    turtle.forward(450)
+   
+#check if it is soluvtion
 def is_soluvion(row_grid, col_grid):
     size = len(row_grid) - 1
     visited = []
@@ -77,3 +48,28 @@ def is_soluvion(row_grid, col_grid):
 
         if y > 0 and row_grid[y][x] == 0:
             stack.append((x, y-1))
+#make the walls inside the maze
+
+while is_soluvion is True:
+     if 1 in grid_columns:
+        turtle.pendown
+        turtle.forward(10)
+     elif 0 in grid_columns:
+        turtle.penup
+        turtle.forward(10)
+
+
+
+
+
+
+
+turtle.done()
+
+
+
+
+
+
+
+

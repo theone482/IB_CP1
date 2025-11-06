@@ -3,22 +3,12 @@ import turtle
 import random
 # what rows and grids ARE
 #grid_rows 
+def rows(row_grid):
+    print("hi")
 
+def columns(col_gird):
+    print("hi")
 
-#grid_columns 
-
-#the siez of the maze
-def steup_maze():
-    screen = turtle.Screen()
-    screen.setup()
-    screen.title("Maze generator")
-#how to make the Walls
-def walls():
-    turtle.pensize(20)
-    turtle.color("black")
-    turtle.forward(450)
-   
-#check if it is soluvtion
 def is_soluvion(row_grid, col_grid):
     size = len(row_grid) - 1
     visited = []
@@ -48,23 +38,63 @@ def is_soluvion(row_grid, col_grid):
 
         if y > 0 and row_grid[y][x] == 0:
             stack.append((x, y-1))
+
+
+#hile is_soluvion is True:
+     #if 1 in grid_columns:
+        #turtle.pendown
+        #turtle.forward(10)
+     #elif 0 in grid_columns:
+        #turtle.penup
+        #turtle.forward(10)
+
+
+
+
+def walls():
+    turtle.hideturtle()
+    turtle.pensize(10)
+    turtle.color("white")
+    turtle.forward(50)
+    turtle.color("black")
+    turtle.forward(250)
+    turtle.left(90)
+    turtle.forward(300)
+    turtle.left(90)
+    turtle.penup()
+    turtle.goto(250,300)
+    turtle.pendown()
+    turtle.forward(250)
+    turtle.left(90)
+    turtle.forward(300)
+    
+def steup_maze():
+    screen = turtle.Screen()
+    screen.setup()
+    screen.title("Maze generator")
+
+
+
+
+#is_soluvion()            
+walls()
+turtle.done()
+rows()
+columns()
+#grid_columns 
+
+#the siez of the maze
+
+#how to make the Walls
+
+   
+#check if it is soluvtion
+
 #make the walls inside the maze
 
-while is_soluvion is True:
-     if 1 in grid_columns:
-        turtle.pendown
-        turtle.forward(10)
-     elif 0 in grid_columns:
-        turtle.penup
-        turtle.forward(10)
 
 
 
-
-
-
-
-turtle.done()
 
 
 

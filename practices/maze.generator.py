@@ -8,7 +8,7 @@ def rows(row_grid):
 
 def columns(col_gird):
     print("hi")
-
+#check if it is soluvtion
 def is_soluvion(row_grid, col_grid):
     size = len(row_grid) - 1
     visited = []
@@ -49,6 +49,7 @@ def is_soluvion(row_grid, col_grid):
         #turtle.forward(10)
 
 
+#how to make the Walls
 
 
 def walls():
@@ -67,7 +68,7 @@ def walls():
     turtle.forward(250)
     turtle.left(90)
     turtle.forward(300)
-    
+#the siez of the maze    
 def steup_maze():
     screen = turtle.Screen()
     screen.setup()
@@ -80,26 +81,7 @@ def steup_maze():
 walls()
 turtle.done()
 rows()
-columns()
-#grid_columns 
-
-#the siez of the maze
-
-#how to make the Walls
-
-   
+columns() 
 #check if it is soluvtion
-
+#check if it is soluvtion
 #make the walls inside the maze
-
-
-
-
-
-
-
-
-
-
-
-

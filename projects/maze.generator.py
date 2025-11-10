@@ -1,4 +1,3 @@
-# IB 2nd maze generator
 # IB, Period 2, Maze Generator
 
 import turtle

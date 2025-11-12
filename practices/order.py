@@ -72,4 +72,51 @@ menu = {
         "Hawaiian sun: lilikoi lychee": 5.99
     }
 }
-print(menu)
+# show menu
+def show_menu():
+    for category, items in menu.items():
+        print(f"\n{category}:")
+        for item, price in items.items():
+            print(f"  {item} - ${price:.2f}")
+
+# get choice from any category
+def get_choice(category, msg):
+    while True:
+        choice = input(msg).strip().lower()
+        options = {k.lower(): v for k, v in menu[category].items()}
+        if choice in options:
+            return choice, options[choice]
+        else:
+            print("Not on the menu, try again.")
+
+# let user pick a main from ANY main category
+def get_main():
+    all_mains = {}
+    for cat in ["Island favorites", "Chicken Plates", "beef plates", "pork", "seafood Plates", "mini meal"]:
+        for item, price in menu[cat].items():
+            all_mains[item.lower()] = price
+    while True:
+        choice = input("Pick a main (any category): ").strip().lower()
+        if choice in all_mains:
+            return choice, all_mains[choice]
+        else:
+            print("Not on the menu, try again.")
+
+# main order
+def main():
+    show_menu()
+    print("\nMake your order:")
+
+    drink, drink_price = get_choice("drinks", "Pick a drink: ")
+    main_item, main_price = get_main()
+    side1, side1_price = get_choice("appetizers & sides", "Pick your first side: ")
+    side2, side2_price = get_choice("appetizers & sides", "Pick your second side: ")
+
+    total = drink_price + main_price + side1_price + side2_price
+
+    print("\n--- Your Order ---")
+    print(f"{drink} - ${drink_price:.2f}")
+    print(f"{main_item} - ${main_price:.2f}")
+    print(f"{side1} - ${side1_price:.2f}")
+    print(f"{side2} - ${side2_price:.2f}")
+    print(f"Total: ${total:.2f}")

@@ -79,6 +79,19 @@ def show_menu():
         for item, price in items.items():
             print(f"  {item} - ${price:.2f}")
 
+# let user pick a main from ANY main category
+def get_main():
+    all_mains = {}
+    for cat in ["island favorites", "chicken plates", "beef plates", "pork", "seafood plates", "mini meal"]:
+        for item, price in menu[cat].items():
+            all_mains[item.lower()] = price
+    while True:
+        choice = input("Pick a main (any category): ").strip().lower()
+        if choice in all_mains:
+            return choice, all_mains[choice]
+        else:
+            print("Not on the menu, try again.")
+
 # get choice from any category
 def get_choice(category, msg):
     while True:
@@ -86,19 +99,6 @@ def get_choice(category, msg):
         options = {k.lower(): v for k, v in menu[category].items()}
         if choice in options:
             return choice, options[choice]
-        else:
-            print("Not on the menu, try again.")
-
-# let user pick a main from ANY main category
-def get_main():
-    all_mains = {}
-    for cat in ["Island favorites", "Chicken Plates", "beef plates", "pork", "seafood Plates", "mini meal"]:
-        for item, price in menu[cat].items():
-            all_mains[item.lower()] = price
-    while True:
-        choice = input("Pick a main (any category): ").strip().lower()
-        if choice in all_mains:
-            return choice, all_mains[choice]
         else:
             print("Not on the menu, try again.")
 
@@ -120,3 +120,6 @@ def main():
     print(f"{side1} - ${side1_price:.2f}")
     print(f"{side2} - ${side2_price:.2f}")
     print(f"Total: ${total:.2f}")
+
+show_menu()
+get_main()

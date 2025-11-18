@@ -72,55 +72,45 @@ menu = {
         "Hawaiian sun: lilikoi lychee": 5.99
     }
 }
-# show menu
 def show_menu():
-    for category, items in menu.items():
-        print(f"\n{category}:")
+    for cat, items in menu.items():
+        print(f"\n{cat}")
         for item, price in items.items():
             print(f"  {item} - ${price:.2f}")
 
-# get choice from any category
-def get_choice(category, msg):
+def get_choice(cat, msg):
     while True:
-        choice = input(msg).strip().lower()
-        options = {k.lower(): v for k, v in menu[category].items()}
-        if choice in options:
-            return choice, options[choice]
-        else:
-            print("Not on the menu, try again.")
+        choice = input(msg).lower()
+        if choice in [i.lower() for i in menu[cat]]:
+            for item, price in menu[cat].items():
+                if item.lower() == choice:
+                    return item, price
+        print("Not on the menu, try again.")
 
-# let user pick a main from ANY main category
 def get_main():
-    all_mains = {}
-    for cat in ["Island favorites", "Chicken Plates", "beef plates", "pork", "seafood Plates", "mini meal"]:
+    mains = {}
+    for cat in ["Island favorites","Chicken Plates","beef plates","pork","seafood Plates","mini meal"]:
         for item, price in menu[cat].items():
-            all_mains[item.lower()] = price
+            mains[item.lower()] = (item, price)
     while True:
-        choice = input("Pick a main (any category): ").strip().lower()
-        if choice in all_mains:
-            return choice, all_mains[choice]
-        else:
-            print("Not on the menu, try again.")
+        choice = input("Pick a main: ").lower()
+        if choice in mains:
+            return mains[choice]
+        print("Not on the menu, try again.")
 
-# main order
 def main():
     show_menu()
-    print("\nMake your order:")
-
-    drink, drink_price = get_choice("drinks", "Pick a drink: ")
-    main_item, main_price = get_main()
-    side1, side1_price = get_choice("appetizers & sides", "Pick your first side: ")
-    side2, side2_price = get_choice("appetizers & sides", "Pick your second side: ")
-
-    total = drink_price + main_price + side1_price + side2_price
-
+    drink, d_price = get_choice("drinks","Pick a drink: ")
+    main_item, m_price = get_main()
+    side1, s1_price = get_choice("appetizers & sides","Pick side 1: ")
+    side2, s2_price = get_choice("appetizers & sides","Pick side 2: ")
+    total = d_price + m_price + s1_price + s2_price
     print("\n--- Your Order ---")
-    print(f"{drink} - ${drink_price:.2f}")
-    print(f"{main_item} - ${main_price:.2f}")
-    print(f"{side1} - ${side1_price:.2f}")
-    print(f"{side2} - ${side2_price:.2f}")
-    print(f"Total: ${total:.2f}")
-#get the progarm running
-if __name__ = "__main__":
-    main()
+    print(drink, f"${d_price:.2f}")
+    print(main_item, f"${m_price:.2f}")
+    print(side1, f"${s1_price:.2f}")
+    print(side2, f"${s2_price:.2f}")
+    print("Total:", f"${total:.2f}")
 
+
+main()

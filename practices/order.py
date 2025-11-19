@@ -120,6 +120,10 @@ def main():
     print(f"{side1} - ${side1_price:.2f}")
     print(f"{side2} - ${side2_price:.2f}")
     print(f"Total: ${total:.2f}")
+#get the progarm running
+if __name__ = "__main__":
+    main()
+
 
 show_menu()
 get_main()

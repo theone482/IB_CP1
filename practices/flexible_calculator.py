@@ -22,11 +22,16 @@ while True:
             print("Oops, that wasn't a number. Try again.")
 
     if not numbers:
-        print("You didn’t give me any numbers!")
+        print("You didn't give me any numbers!")
         continue
+    def sum(*numbers):
+        result = 1
+        for num in numbers:
+            result *= num
+        return result
 
     if operations == "sum":
-        result = sum(numbers)
+        sum
     elif operations == "average":
         result = sum(numbers) / len(numbers)
     elif operations == "max":

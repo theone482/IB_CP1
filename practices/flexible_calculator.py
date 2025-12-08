@@ -47,5 +47,3 @@ while True:
         continue
 
     print(f"Here’s your result for {operations}: {result}")
-
-    #hi

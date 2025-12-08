@@ -42,3 +42,7 @@ person["birthday"] = "June 8"
 print(person.items())
 person["birthday"] = "october 27"
 print(person.items())
+print(.....  .....
+       ...    ...
+        .  ..  . 
+       :........:)

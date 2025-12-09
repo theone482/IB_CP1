@@ -23,7 +23,6 @@ player = {
         35
     }
 }
-
 #Phantom Variables:
 phantom = {
     #health = 200
@@ -35,7 +34,6 @@ phantom = {
         250
     }
 }
-
 #Soldier Variables (Room 3 and 5):
 soldier3and5 = {
     #health = 500
@@ -56,7 +54,6 @@ soldier3and5 = {
         100
     }
 }
-
 #Soldier Variables (Room 6 and 7):
 soldier6and7 = {
     #health = 700
@@ -84,23 +81,30 @@ soldier6and7 = {
         }
     }
 }
-
-
-
-
-
-
-
-
 #Main Boss Variables:
-#health = 27,500
-#attack = 400–600
-#abilities:
-#- Shadow claws / energy waves
-#- Manipulates environment (falling rocks, surging water)
-#- Targets player wound (extra damage)
-#- Summons illusions (distraction)
-#- Unlocks memory fragments on each successful strike
+mainboss = {
+    #health = 27,500
+    "health": {
+        27,500
+    },
+    #attack = 400–60
+    "attack": {
+        400-600
+    },
+    #abilities:
+    "abilities": {
+        #- Shadow claws / energy waves
+        "shadow claws/ energy waves": "+150",
+        #- Manipulates environment (falling rocks, surging water)
+        "manipulates enviroment": ""
+        #- Targets player wound (extra damage)
+        "targets player wound"
+        #- Summons illusions (distraction)
+        "summons illusions"
+        #- Unlocks memory fragments on each successful strike
+        "unlocks memory"
+    }
+}
 
 #RoomStatus:
 #Each room has a status flag:
@@ -111,11 +115,19 @@ soldier6and7 = {
 #enter_room(room_number) → checks if the room has been visited before
 #If visited == TRUE → no fight, no chest reward
 #If visited == FALSE → trigger fight and chest logic, then mark room as
-
+def options():
+    
 #Function: show_player_stats
+def player_stats():
+    health = print(player["health"])
+    print(health)
+
+print(player_stats)
 #Purpose: Display current player health, strength, agility, speed, and memory.
 
 #Function: fight_phantoms
+def fight_phantoms():     
+    print(player_stats)
 #Purpose: Handle combat against phantom foes in Room 2.
 #Options:
 #- Attack (damage based on player strength)

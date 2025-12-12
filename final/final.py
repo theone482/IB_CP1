@@ -1,49 +1,28 @@
 # IB 2nd final
 
-#Player Variables:
-player = {
-    #health = 1000 (can increase to 2200 or 3200 with upgrades)
-    "health": {
-        1000
-    },
-    #strength = 75–150 (can increase to 350 with upgrades)
-    "strength": {
-        75-150
-    },
-    #memory = 10 (starts low, grows after each fight)
-    "memory": {
-        10
-    },
-    #agility = 10 (out of 100)
-    "agility": {
-        25
-    },
-    #speed = 15 (out of 100)
-    "speed": {
-        35
-    }
-}
+import random
+#Player Variables
+#health = 1000 (can increase to 2200 or 3200 with upgrades)
+player_health = 1000 
+player_strength = random.randint(75, 150)
+#strength = 75–150 (can increase to 350 with upgrades)
+#memory = 10 (starts low, grows after each fight)
+player_memory= 10
+#agility = 10 (out of 100)
+player_agility = 25
+#speed = 15 (out of 100)
+player_speed = 35
 #Phantom Variables:
-phantom = {
     #health = 200
-    "health": {
-        200
-    },
+phantom_health = 200
+
     #attack = 250
-    "attack": {
-        250
-    }
-}
+phantom_attack = 250
 #Soldier Variables (Room 3 and 5):
-soldier3and5 = {
-    #health = 500
-    "health": {
-        500
-    },
-    #attack = 100–200
-    "attack": {
-        100-200
-    },
+soldier3_health = 50    #attack = 100–200
+soldier3_attack = 100-200
+soldier5_health = 50    #attack = 100–200
+soldier5_attack = 100-200
     #chest_rewards:
     #Room 3 → +1000 health potion
     "chest 3": {
@@ -82,29 +61,18 @@ soldier6and7 = {
     }
 }
 #Main Boss Variables:
-mainboss = {
-    #health = 27,500
-    "health": {
-        27,500
-    },
+mainboss_health = 27,500
+
     #attack = 400–60
-    "attack": {
-        400-600
-    },
+mainboss_attack = 400-600
+
     #abilities:
-    "abilities": {
-        #- Shadow claws / energy waves
-        "shadow claws/ energy waves": "+150",
-        #- Manipulates environment (falling rocks, surging water)
-        "manipulates enviroment": ""
-        #- Targets player wound (extra damage)
-        "targets player wound"
-        #- Summons illusions (distraction)
-        "summons illusions"
-        #- Unlocks memory fragments on each successful strike
-        "unlocks memory"
-    }
-}
+mainbossabilities = mainboss_options
+#- Shadow claws / energy waves
+def mainboss_options():      
+    shadowclaws_energywaves = mainboss_health + 150
+    targetsplayerwound = mainboss_attack +10
+    print(shadowclaws_energywaves, targetsplayerwound)
 
 #RoomStatus:
 #Each room has a status flag:
@@ -115,7 +83,11 @@ mainboss = {
 #enter_room(room_number) → checks if the room has been visited before
 #If visited == TRUE → no fight, no chest reward
 #If visited == FALSE → trigger fight and chest logic, then mark room as
-def options():
+attack = random.randint(player_strength)
+jump_over_attack = random.randint(1, 100)
+runaway = random.randint(1,100)
+print(attack, jump_over_attack, runaway)
+
 
     
 #Function: show_player_statsdef player_stats():
@@ -124,8 +96,14 @@ def options():
 #Purpose: Display current player health, strength, agility, speed, and memory.
 
 #Function: fight_phantoms
-def fight_phantoms():     
-    print("hi")
+def fight_phantoms():    
+    choice = input(f" choose your action:\n1. Attack 75-150 \n2. Wild Attack\n3. Heal (+9 HP)\n4. Flee\n5. Defend\nEnter number: ").strip()
+    if choice == "attack":
+         phantom_health -= attack
+    elif player_health <= 0:
+         print("Player died. restart to play again")
+    elif phantom_attack <= 0:
+         print("phantom defeated. keep going deep.")
 #Purpose: Handle combat against phantom foes in Room 2.
 #Options:
 #- Attack (damage based on player strength)
@@ -138,14 +116,15 @@ def fight_phantoms():
 
 #Function: fight_soldier_room3_5
 def fight_soldier_room3_5():
-     print('hi')
+     print(options)
+     
 #Purpose: Handle combat against soldiers in Room 3 and 5.
 #Options same as phantom fight.
 #Outcome:
 #- If soldier defeated → chest reward:
 #Room 3 → +1000 health
 #Room 5 → Sword (+100 damage)
-
+fight_soldier_room3_5
 #Function: fight_soldier_room6_7
 def fight_soldier_room6_7():
      print("hi")
@@ -169,6 +148,16 @@ def fight_main_boss():
      "checking your stats, balancing your stance, blocking, and countering — all become essential here.Breaks " 
      "the seal on your memory: Each time you land a successful strike, fragments of your past return. By the " 
      "time you defeat it, the shadow dissolves, and your memories flood back, revealing the truth: the little ")
+     if player_health == 0:
+          print("player died. Restart to play again.")
+     elif boss_health == 0:
+          print(flashback)
+          again = input("do you want ot play again: ")
+          if again == "yes" or "Yes":
+               game()
+          elif again == "no" or "No":
+               print("Thank you for playing. Hope to see you again")
+
 #Purpose: Handle combat against the final boss in Room 9.
 #Options are the same as soldier fights.
 #Boss abilities:
@@ -182,6 +171,7 @@ def fight_main_boss():
 
 #Function: reset_stats
 def reset_stats():
+    
 #Purpose: Update player stats after each fight.
 #Actions:
 #- Increase memory by +5
@@ -190,6 +180,7 @@ def reset_stats():
 
 #Function: enter_room(room_number)
 def enter_room():
+     
 #Purpose: Check if the room has been visited before.
 #If visited == TRUE:
 #Print "You have already been here. No fight, no chest."
@@ -210,12 +201,18 @@ def room_1():
     "touch it and feel a cut and some dry blood on your scalp and forehead. She looked around and saw nothing so " 
     "she looked in her pocket and found a picture of a family she didn't know but the little girl in it looked like her. " 
     "As you walk up the river bank you notice a cave. You can't help but wonder what is inside so you go inside.")
+    #Ask the player: "Do you want to enter the cave?"
     roomtwo = input("do you want to go forward to the cave?: ")
-    if 
-#Ask the player: "Do you want to enter the cave?"
-#If yes → go to Room 2.
-#If no → loop until yes.
-room_1
+    #If no → loop until yes.
+    if roomtwo == "no":
+         print("")
+    #If yes → go to Room 2.
+    if roomtwo == "yes":
+         print("hi")
+        
+
+
+
 #Room 2:
 def room_2():
     #Print cave description.
@@ -435,3 +432,6 @@ def flashback():
      "head she could feel the blood drip down her forehead as she fell on the river bank, her finger in the " 
      "river. As she heard horse running and her aunt and her brothers  running and the soldiers yelling where " 
      "did they go. As her eyes closed and everything went black.")
+
+def game():
+     room_1

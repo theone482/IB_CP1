@@ -1,222 +1,120 @@
 # IB 2nd final
 
 import random
-#Player Variables
-#health = 1000 (can increase to 2200 or 3200 with upgrades)
-player_health = 1000 
+
+
+player_health = 1000
 player_strength = random.randint(75, 150)
-#strength = 75–150 (can increase to 350 with upgrades)
-#memory = 10 (starts low, grows after each fight)
-player_memory= 10
-#agility = 10 (out of 100)
+player_memory = 10
 player_agility = 25
-#speed = 15 (out of 100)
 player_speed = 35
-#Phantom Variables:
-    #health = 200
+
 phantom_health = 200
-
-    #attack = 250
 phantom_attack = 250
-#Soldier Variables (Room 3 and 5):
-soldier3_health = 50    #attack = 100–200
-soldier3_attack = 100-200
-soldier5_health = 50    #attack = 100–200
-soldier5_attack = 100-200
-    #chest_rewards:
-    #Room 3 → +1000 health potion
-    "chest 3": {
-        1000
-    },
-    #Room 5 → Sword (+100 damage)
-    "chest 5": {
-        100
-    }
+
+soldier3_health = 50
+soldier3_attack = random.randint(100, 200)
+soldier5_health = 50
+soldier5_attack = random.randint(100, 200)
+
+soldier6_health = 700
+soldier6_attack = random.randint(150, 250)
+
+mainboss_health = 27500
+mainboss_attack = random.randint(400, 600)
+
+
+chests = {
+    "room3": {"health": 1000},
+    "room5": {"attack": 100},
+    "room6": {"health": 200},
+    "room7": {"random": [{"attack": 100}, {"health": 1000}]}
 }
-#Soldier Variables (Room 6 and 7):
-soldier6and7 = {
-    #health = 700
-    "health": {
-        700
-    },
-    #attack = 150–250
-    "attack": {
-        150-250
-    },
-    #chest_rewards:
-    #Room 6 → Armor (+200 health)
-    "chest 6": {
-        200
-    },
-    #Room 7 → Random reward (50% chance):
-    "chest 7": {
-        #Option 1 → +100 attack
-        "op 1": {
-            100
-        },
-        #Option 2 → +1000 health
-        "op 2": {
-            1000
-        }
-    }
-}
-#Main Boss Variables:
-mainboss_health = 27,500
 
-    #attack = 400–60
-mainboss_attack = 400-600
+def player_stats():
+    print(f"\n--- Player Stats ---")
+    print(f"Health: {player_health}")
+    print(f"Strength: {player_strength}")
+    print(f"Agility: {player_agility}")
+    print(f"Speed: {player_speed}")
+    print(f"Memory: {player_memory}")
+    print("--------------------\n")
 
-    #abilities:
-mainbossabilities = mainboss_options
-#- Shadow claws / energy waves
-def mainboss_options():      
-    shadowclaws_energywaves = mainboss_health + 150
-    targetsplayerwound = mainboss_attack +10
-    print(shadowclaws_energywaves, targetsplayerwound)
+def reset_stats(reward=None):
+    global player_memory, player_health, player_strength
+    player_memory += 5
+    if reward:
+        if "health" in reward:
+            player_health += reward["health"]
+        if "attack" in reward:
+            player_strength += reward["attack"]
 
-#RoomStatus:
-#Each room has a status flag:
-#visited = FALSE (default)
-#soldier_defeated = FALSE (default)
-#chest_claimed = FALSE (default)
+def fight_enemy(enemy_name, enemy_health, enemy_attack, reward=None):
+    global player_health, player_strength
+    print(f"\nYou encounter a {enemy_name}!")
+    while player_health > 0 and enemy_health > 0:
+        choice = input("Choose action: (1) Attack (2) Heal (+9 HP) (3) Flee: ").strip()
+        if choice == "1":
+            damage = random.randint(75, player_strength)
+            enemy_health -= damage
+            print(f"You hit the {enemy_name} for {damage} damage! Enemy health: {enemy_health}")
+        elif choice == "2":
+            player_health += 9
+            print(f"You healed! Health: {player_health}")
+        elif choice == "3":
+            if random.randint(1, 100) <= 50:
+                print("You fled successfully!")
+                return
+            else:
+                print("Failed to flee! The fight continues.")
+        
+        if enemy_health > 0:
+            dmg = random.randint(50, enemy_attack)
+            player_health -= dmg
+            print(f"{enemy_name} hits you for {dmg}! Your health: {player_health}")
+    if player_health <= 0:
+        print("You died. Restart to play again.")
+    else:
+        print(f" {enemy_name} defeated!")
+        if reward:
+            reset_stats(reward)
+            print("You gained a chest reward!")
+        player_stats()
 
-#enter_room(room_number) → checks if the room has been visited before
-#If visited == TRUE → no fight, no chest reward
-#If visited == FALSE → trigger fight and chest logic, then mark room as
-attack = random.randint(player_strength)
-jump_over_attack = random.randint(1, 100)
-runaway = random.randint(1,100)
-print(attack, jump_over_attack, runaway)
+def fight_phantoms():
+    fight_enemy("Phantom", phantom_health, phantom_attack)
 
+def fight_soldier_room3():
+    fight_enemy("Soldier (Room 3)", soldier3_health, soldier3_attack, chests["room3"])
 
-    
-#Function: show_player_statsdef player_stats():
-     print("hi")
+def fight_soldier_room5():
+    fight_enemy("Soldier (Room 5)", soldier5_health, soldier5_attack, chests["room5"])
 
-#Purpose: Display current player health, strength, agility, speed, and memory.
+def fight_soldier_room6():
+    fight_enemy("Soldier (Room 6)", soldier6_health, soldier6_attack, chests["room6"])
 
-#Function: fight_phantoms
-def fight_phantoms():    
-    choice = input(f" choose your action:\n1. Attack 75-150 \n2. Wild Attack\n3. Heal (+9 HP)\n4. Flee\n5. Defend\nEnter number: ").strip()
-    if choice == "attack":
-         phantom_health -= attack
-    elif player_health <= 0:
-         print("Player died. restart to play again")
-    elif phantom_attack <= 0:
-         print("phantom defeated. keep going deep.")
-#Purpose: Handle combat against phantom foes in Room 2.
-#Options:
-#- Attack (damage based on player strength)
-#- Jump over attack (10% success chance)
-#- Run away safely (50% success chance)
-#- Run away but chased (failure, must fight again)
-#Outcome:
-#- If player health ≤ 0 → print "Player died. Restart to play again."
-#- If phantom health ≤ 0 → print "Phantom defeated. Continue deeper."
+def fight_soldier_room7():
+    reward = random.choice(chests["room7"]["random"])
+    fight_enemy("Soldier (Room 7)", soldier6_health, soldier6_attack, reward)
 
-#Function: fight_soldier_room3_5
-def fight_soldier_room3_5():
-     print(options)
-     
-#Purpose: Handle combat against soldiers in Room 3 and 5.
-#Options same as phantom fight.
-#Outcome:
-#- If soldier defeated → chest reward:
-#Room 3 → +1000 health
-#Room 5 → Sword (+100 damage)
-fight_soldier_room3_5
-#Function: fight_soldier_room6_7
-def fight_soldier_room6_7():
-     print("hi")
-#Purpose: Handle combat against soldiers in Room 6 and 7.
-#Options same as phantom fight.
-#Outcome:
-#- If soldier defeated → chest reward:
-#Room 6 → +200 health
-#Room 7 → Random reward (50% chance):
-#Option 1 → +100 attack
-#Option 2 → +1000 health
-
-#Function: fight_main_boss
 def fight_main_boss():
-     print("Attacks with overwhelming force: It strikes with shadowy claws or waves of energy that shake the " 
-     "cavern walls, testing your strength and agility.Manipulates the environment: The chamber itself reacts to" 
-     " the boss — rocks fall, water surges, and the glowing veins in the walls pulse with its power.Targets " 
-     "your wound: Every roar or strike makes the cut on your head throb, symbolizing how it feeds on your " 
-     "weakness and confusion.Summons illusions: It can conjure phantom figures or twisted versions of your " 
-     "memories to distract and confuse you during battle.Tests your training: The lessons from the wizard — " 
-     "checking your stats, balancing your stance, blocking, and countering — all become essential here.Breaks " 
-     "the seal on your memory: Each time you land a successful strike, fragments of your past return. By the " 
-     "time you defeat it, the shadow dissolves, and your memories flood back, revealing the truth: the little ")
-     if player_health == 0:
-          print("player died. Restart to play again.")
-     elif boss_health == 0:
-          print(flashback)
-          again = input("do you want ot play again: ")
-          if again == "yes" or "Yes":
-               game()
-          elif again == "no" or "No":
-               print("Thank you for playing. Hope to see you again")
+    fight_enemy("Main Boss", mainboss_health, mainboss_attack)
+    if player_health > 0:
+        flashback()
 
-#Purpose: Handle combat against the final boss in Room 9.
-#Options are the same as soldier fights.
-#Boss abilities:
-#- Stronger attacks (400–600 damage)
-#- Manipulates environment
-#- Targets wound for extra damage
-#- Summons illusions
-#Outcome:
-#- If player dies → print "Player died. Restart to play again."
-#- If the boss is defeated → unlock full memory, reveal Rosie’s past.
-
-#Function: reset_stats
-def reset_stats():
-    
-#Purpose: Update player stats after each fight.
-#Actions:
-#- Increase memory by +5
-#- Apply chest rewards (health, attack, armor)
-#- Keep agility/speed progression optional
-
-#Function: enter_room(room_number)
-def enter_room():
-     
-#Purpose: Check if the room has been visited before.
-#If visited == TRUE:
-#Print "You have already been here. No fight, no chest."
-#If visited == FALSE:
-#Trigger fight function for that room.
-#If soldier defeated:
-#Mark soldier_defeated = TRUE
-#If chest reward given:
-#Mark chest_claimed = TRUE
-#Mark visited = TRUE
-
-#Room 1:
 def room_1():
-    #Print story introduction.
     print("You wake up by the river and notice there is a family fish nimbling your finger." 
     " You jump up from the weird sensation. You look down at the family of fish as you feel a sense of sadness. " 
     "You feel like you have to go home but you don't remember anything. When you walk away, your head starts to hurt as you " 
     "touch it and feel a cut and some dry blood on your scalp and forehead. She looked around and saw nothing so " 
     "she looked in her pocket and found a picture of a family she didn't know but the little girl in it looked like her. " 
     "As you walk up the river bank you notice a cave. You can't help but wonder what is inside so you go inside.")
-    #Ask the player: "Do you want to enter the cave?"
-    roomtwo = input("do you want to go forward to the cave?: ")
-    #If no → loop until yes.
-    if roomtwo == "no":
-         print("")
-    #If yes → go to Room 2.
-    if roomtwo == "yes":
-         print("hi")
-        
+    choice = input("Do you want to enter the cave? (yes/no): ")
+    if choice.lower() == "yes":
+        room_2()
 
-
-
-#Room 2:
 def room_2():
-    #Print cave description.
-        print("Each step echoed faintly against the stone, the sound swallowed quickly by the heavy silence inside. " 
+    print("Each step echoed faintly against the stone, the sound swallowed quickly by the heavy silence inside. " 
         "The walls glistened with moisture, and faint trickles of water ran down into shallow pools that reflected your " 
         "uncertain face. You reached out to steady yourself, your fingers brushing against the cold, rough surface of the rock,"
         " and the sensation sent a shiver through your body.As you moved deeper, the light from the river faded, replaced by " 
@@ -234,13 +132,14 @@ def room_2():
         "not fear, and listen to the rhythm of battle—every enemy has a pattern, and once you find it, you can break it.” " 
         "His words echoed through the cavern, each lesson sinking into your bones, until you felt not only trained but awakened" 
         ", ready to face the dangers waiting deeper in the cave.")
+    fight_phantoms()
+    next_room = input("Go to Room 3, 4, or 5? ").strip()
+    if next_room == "3": room_3()
+    elif next_room == "4": room_4()
+    elif next_room == "5": room_5()
 
-#Fight phantoms using fight_phantoms function.
-#Ask if player want to go to Room 3, 4, or 5
-
-#Room 3:
 def room_3():
-     print("Each step echoed faintly against the stone, the sound swallowed quickly by the heavy silence inside. " 
+    print("Each step echoed faintly against the stone, the sound swallowed quickly by the heavy silence inside. " 
      "The walls glistened with moisture, and faint trickles of water ran down into shallow pools that reflected your uncertain " 
      "face. You reached out to steady yourself, your fingers brushing against the cold, rough surface of the rock, and the " 
      "sensation sent a shiver through your body.As you moved deeper, the light from the river faded, replaced by shadows that " 
@@ -263,12 +162,13 @@ def room_3():
      " with light. As you touch it, warmth floods your body, restoring your health and strengthening your stamina. The cavern " 
      "seems to sigh, as though acknowledging your victory, and the photograph in your pocket feels lighter, as if the path " 
      "forward has grown clearer.")
-#Fight soldier using fight_soldier_room3_5 function.
-#Ask player if they want to go to Room 4 or 6
+    fight_soldier_room3()
+    next_room = input("Go to Room 4 or 6? ").strip()
+    if next_room == "4": room_4()
+    elif next_room == "6": room_6()
 
-#Room 4:
 def room_4():
-     print("you instinctively turn left, drawn by a faint draft that whispers through the stone corridor. The passage narrows, " 
+    print("you instinctively turn left, drawn by a faint draft that whispers through the stone corridor. The passage narrows, " 
      "forcing you to brush against the rough walls, and the sound of your footsteps echoes strangely, as if the cave itself is " 
      "listening.After a few careful steps, the tunnel opens into a new chamber. This room feels different—larger, but lower, " 
      "the ceiling heavy with hanging stalactites that drip water in slow, steady rhythms. The floor is uneven, scattered with " 
@@ -290,12 +190,14 @@ def room_4():
      "shimmering vial, its glow pulsing like a heartbeat. As you touch it, warmth floods your body, restoring your health and " 
      "strengthening your stamina. The chamber feels lighter, the markings on the wall glowing faintly as if acknowledging your " 
      "victory.")
-#Print narrative only (no combat).
-#Ask if player want to go to Room 5, 3, or 7
+    fight_soldier_room3()
+    next_room = input("Go to Room 5, 3, or 7? ").strip()
+    if next_room == "5": room_5()
+    elif next_room == "3": room_3()
+    elif next_room == "7": room_7()
 
-#Room 5:
 def room_5():
-     print("you step into the cave and instinctively veer to the right, drawn by a faint glow that flickers " 
+    print("you step into the cave and instinctively veer to the right, drawn by a faint glow that flickers " 
      "against the stone. The passage is wider here, but the floor slopes downward, forcing you to tread carefully" 
      " as loose pebbles scatter beneath your boots. The air grows colder with each step, carrying the sharp " 
      "scent of minerals and something faintly sweet, almost like decaying flowers.The tunnel opens into a chamber" 
@@ -310,12 +212,15 @@ def room_5():
      " the eerie light, her eyes reflecting the same strange luminescence as the fungi.The silence here is " 
      "different—less oppressive, more expectant, as if the cave is holding its breath, waiting for you to " 
      "take the next step deeper into its secrets.")
-#Fight soldier using fight_soldier_room3_5 function.
-#Ask if player want to go to Room 4, 3, 7, or 8
+    fight_soldier_room5()
+    next_room = input("Go to Room 4, 3, 7, or 8? ").strip()
+    if next_room == "4": room_4()
+    elif next_room == "3": room_3()
+    elif next_room == "7": room_7()
+    elif next_room == "8": room_8()
 
-#Room 6:
 def room_6():
-     print("The path slopes downward, twisting like a serpent through the earth. Each step feels heavier, the " 
+    print("The path slopes downward, twisting like a serpent through the earth. Each step feels heavier, the " 
      "air growing colder and thicker, until the tunnel finally opens into a vast chamber—the fifth room. Unlike" 
      " the others, this space feels ancient, almost sacred. The ceiling arches high above, lost in shadow, and " 
      "the walls are lined with jagged formations that glitter faintly, as though the stone itself remembers " 
@@ -347,12 +252,13 @@ def room_6():
      "and open it. Inside lies not just a vial, but a radiant crystal pulsing with energy. As you touch it," 
      " warmth floods your body, restoring your health completely and expanding your stamina beyond its " 
      "limits. You feel stronger, faster, more alive")
-#Fight soldier using fight_soldier_room6_7 function.
-#Ask if player want to go to Room 3 or 7
+    fight_soldier_room6()
+    next_room = input("Go to Room 3 or 7? ").strip()
+    if next_room == "3": room_3()
+    elif next_room == "7": room_7()
 
-#Room 7:
 def room_7():
-     print("The tunnel bends sharply to the left, narrowing until you have to press your shoulder against the " 
+    print("The tunnel bends sharply to the left, narrowing until you have to press your shoulder against the " 
      "damp wall to squeeze through. The air grows colder, and a faint draft brushes past your face, carrying " 
      "with it the smell of wet stone and something faintly metallic. As you push forward, the passage widens " 
      "suddenly into a chamber that feels older than the others, as though it has been untouched for centuries." 
@@ -368,12 +274,15 @@ def room_7():
      " archway, brushing away loose stones, and notice that beneath the rubble lies a narrow gap, just wide " 
      "enough for someone to slip through. The chamber feels like it's holding its breath, waiting for you to " 
      "decide whether to push deeper into the unknown.")
-#Fight soldier using fight_soldier_room6_7 function.
-#Ask if player want to go to Room 5, 3, 6, or 4
+    fight_soldier_room7()
+    next_room = input("Go to Room 5, 3, 6, or 4? ").strip()
+    if next_room == "5": room_5()
+    elif next_room == "3": room_3()
+    elif next_room == "6": room_6()
+    elif next_room == "4": room_4()
 
-#Room 8:
 def room_8():
-     print("The tunnel stretches on, straight and unyielding, as though it wants to test your resolve. The air" 
+    print("The tunnel stretches on, straight and unyielding, as though it wants to test your resolve. The air" 
      " grows colder with each step, and the silence presses heavier against your ears. Your footsteps echo " 
      "faintly, swallowed by the darkness, until at last the passage opens into a seventh chamber.This room is " 
      "vast, larger than any you've seen before. The ceiling arches high overhead, lost in shadow, and the walls" 
@@ -389,12 +298,13 @@ def room_8():
      " from within it comes a faint breeze carrying the scent of earth and something unfamiliar—something alive." 
      " The seventh room feels like a threshold, a place where the cave is offering you a choice: stay and face " 
      "the reflection of yourself, or push through the crack into whatever lies beyond.")
-#Reflection room (narrative choice: face reflection or move deeper).
-#Ask if player want to go to Room 5, 7, or 9
+    next_room = input("Go to Room 5, 7, or 9? ").strip()
+    if next_room == "5": room_5()
+    elif next_room == "7": room_7()
+    elif next_room == "9": room_9()
 
-#Room 9:
 def room_9():
-     print("The tunnel plunges deeper than any before, the air growing colder and heavier with each step. Your " 
+    print("The tunnel plunges deeper than any before, the air growing colder and heavier with each step. Your " 
      "breath comes in shallow bursts as the walls close in, then suddenly open into a cavern so vast it feels " 
      "like the heart of the earth itself. The ceiling disappears into shadow, and the ground trembles faintly " 
      "beneath your feet. At the center of the chamber, a figure waits—towering, twisted, its form shifting like" 
@@ -411,10 +321,11 @@ def room_9():
      "barrier between you and the truth of who you are.Tears sting your eyes as the memories flood back in full." 
      " You are not lost. You are not alone. This is your family, your life, and you have found your way back to " 
      "it.")
-#Fight main boss using fight_main_boss function.
-#Unlock Rosie’s full memory and reveal family backstory.
+    fight_main_boss()
+    flashback()
+
 def flashback():
-     print("There was once a happy family living on this mountain called Lugh. And in that family there was a " 
+    print("There was once a happy family living on this mountain called Lugh. And in that family there was a " 
      " special little girl named Rosie Jane and her two brothers named James and Giorgio . One day she is " 
      "walking when she sees a soldier running towards her and her family with weapons and torches. Her family, " 
      "who is a kind and happy person, looked nervous and serious as he told Rosie to take her James who at the " 
@@ -434,4 +345,26 @@ def flashback():
      "did they go. As her eyes closed and everything went black.")
 
 def game():
-     room_1
+    print("Welcome to Rosie’s Journey! ")
+    player_stats()
+    room_1()
+    room_2()
+    fight_phantoms()
+    room_3()
+    fight_soldier_room3_5()
+    room_4()
+    fight_soldier_room3_5()
+    room_5()
+    fight_soldier_room3_5()
+    room_6()
+    fight_soldier_room6_7()
+    room_7()
+    fight_soldier_room6_7()
+    room_8()
+    room_9()
+    fight_main_boss()
+    print("Game complete! Thanks for playing.")
+
+
+game()
+

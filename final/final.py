@@ -13,28 +13,28 @@ player_speed = 35
 phantom_health = 200
 phantom_attack = 150   # Lowered attack
 
-soldier3_health = 50
+soldier3_health = 250
 soldier3_attack = random.randint(75, 125)
 
-soldier5_health = 50
+soldier5_health = 500
 soldier5_attack = random.randint(75, 125)
 
 soldier6_health = 700
 soldier6_attack = random.randint(100, 175)
 
-mainboss_health = 15000   # Lowered boss health
-mainboss_attack = random.randint(300, 450)
+mainboss_health = 1500   # Lowered boss health
+mainboss_attack = random.randint(250, 350)
 
 # --- Chest Rewards ---
 chests = {
     "room3": {"health": 1000},
-    "room5": {"attack": 100},
-    "room6": {"health": 200},
-    "room7": {"random": [{"attack": 100}, {"health": 1000}]}
+    "room5": {"attack": 1000},
+    "room6": {"health": 500},
+    "room7": {"random": [{"attack": 1000}, {"health": 1000}]}
 }
 
 def intro_instructions():
-    print("\n--- Welcome to Rosie’s Journey ---")
+    print("\n--- Welcome to Rosie'11s Journey ---")
     print("Instructions:")
     print("1. Attack: Damage is RANDOM between 75 and your Strength.")
     print("2. Heal: Restores +25 HP each time.")
@@ -119,6 +119,14 @@ def fight_soldier_room7():
 def fight_main_boss():
     fight_enemy("Main Boss", mainboss_health, mainboss_attack)
     if player_health > 0:
+        print("Its eyes burn with a light that pierces straight into your wound, making your head " 
+     "throb violently.You stagger forward, clutching the photograph, and the creature lets out a sound that is " 
+     "neither roar nor whisper but something in between—an echo of your own fear. The battle begins. (after the" 
+     " main boss dies)You dodge its strikes, each one shaking the cavern walls, and fight back with everything " 
+     "you can muster. The cave itself seems to join the struggle: stones fall, water surges from cracks, and " 
+     "the glowing veins in the walls pulse with each clashThe fight is brutal, but as you press on, flashes of " 
+     "memory begin to break through the pain (flash back).Finally, with one last desperate blow, the creature " 
+     "collapses, dissolving into mist that vanishes into the cavern walls. Silence falls, heavy and absolute.")
         flashback()
 
 # --- Rooms (same names preserved, cave choice fixed) ---
@@ -130,6 +138,7 @@ def room_1():
         if choice.lower() == "no":
             print("You feel drawn to the cave... you must enter to continue.")
     room_2()
+
 def room_2():
     print("Each step echoed faintly against the stone, the sound swallowed quickly by the heavy silence inside. " 
         "The walls glistened with moisture, and faint trickles of water ran down into shallow pools that reflected your " 
@@ -183,6 +192,7 @@ def room_3():
     next_room = input("Go to Room 4 or 6? ").strip()
     if next_room == "4": room_4()
     elif next_room == "6": room_6()
+    elif next_room == "7": room_7()
 
 def room_4():
     print("you instinctively turn left, drawn by a faint draft that whispers through the stone corridor. The passage narrows, " 
@@ -196,19 +206,8 @@ def room_4():
      "tracing them with your fingertips, and the photograph in your pocket feels heavier again, as though urging you to connect" 
      " the pieces.The silence is thicker here, broken only by the drip of water and the faint scurry of something unseen in the" 
      " shadows. You pause, heart racing, wondering if you are truly alone in this chamber.You pause, heart racing, when the " 
-     "silence breaks with the scrape of metal against stone. From the shadows, a soldier steps forward, clad in tarnished armor" 
-     ", his sword gleaming faintly in the dim light. His stance is wide and balanced, exactly as the wizard had taught you. He " 
-     "raises his shield, testing you with a deliberate strike.You react instinctively, planting your feet and blocking the blow." 
-     " The clash rings through the chamber, echoing against the stalactites above. He presses forward, each strike measured, " 
-     "forcing you to remember the rhythm of battle. You dodge, counter, and strike with purpose, your movements sharper now, " 
-     "guided by the wizard's lessons. The soldier circles, relentless, until you find the opening—slipping past his guard and " 
-     "landing a decisive blow. His form shudders, then dissolves into shadow, leaving only silence behind.Where he fell, a chest" 
-     " materialized, ancient wood bound with iron, glowing faintly in the dim light. You kneel and lift the lid. Inside lies a " 
-     "shimmering vial, its glow pulsing like a heartbeat. As you touch it, warmth floods your body, restoring your health and " 
-     "strengthening your stamina. The chamber feels lighter, the markings on the wall glowing faintly as if acknowledging your " 
-     "victory.")
-    fight_soldier_room3()
-    next_room = input("Go to Room 5, 3, or 7? ").strip()
+     "silence breaks with the scrape of metal against stone. you see the door for the next room which do you go to?")
+    next_room = input("Go to the left to Room 5,to the right to room 3, or forward to room 7?(type just the numbers ex: 7) ").strip()
     if next_room == "5": room_5()
     elif next_room == "3": room_3()
     elif next_room == "7": room_7()
@@ -230,9 +229,8 @@ def room_5():
      "different—less oppressive, more expectant, as if the cave is holding its breath, waiting for you to " 
      "take the next step deeper into its secrets.")
     fight_soldier_room5()
-    next_room = input("Go to Room 4, 3, 7, or 8? ").strip()
+    next_room = input("Go to the right to Room 4, or forward to room 8 or forward slightly to the right to room 7?(type just the numbers ex: 7) ").strip()
     if next_room == "4": room_4()
-    elif next_room == "3": room_3()
     elif next_room == "7": room_7()
     elif next_room == "8": room_8()
 
@@ -254,8 +252,9 @@ def room_6():
      "is a place of meaning, a place where answers might finally begin to reveal.As the hum from the " 
      "pedestal grows louder, the silence shatters with the heavy clang of armored boots. From the shadows " 
      "at the far wall, a soldier emerges—larger, stronger, and more imposing than the one you faced before." 
-     " His armor is darker, scarred from countless battles, and his sword gleams with a sharper edge. His " 
-     "stance is firm, his movements deliberate, and you recognize instantly that he fights with the same " 
+     " His armor is darker, scarred from countless battles, and his sword gleams with a sharper edge.")
+    fight_soldier_room6()
+    print("His stance is firm, his movements deliberate, and you recognize instantly that he fights with the same " 
      "iscipline the wizard taught you—but faster, harder, and with no hesitation.He charges, his strikes " 
      "ringing through the chamber like thunder. You block, but the force rattles your arms, forcing you to " 
      "dig deeper into your strength and agility. Each swing tests your balance, each shield bash pushes you" 
@@ -269,10 +268,10 @@ def room_6():
      "and open it. Inside lies not just a vial, but a radiant crystal pulsing with energy. As you touch it," 
      " warmth floods your body, restoring your health completely and expanding your stamina beyond its " 
      "limits. You feel stronger, faster, more alive")
-    fight_soldier_room6()
-    next_room = input("Go to Room 3 or 7? ").strip()
+    next_room = input("Go to the up to Room 3,to the left to room 7, or forward to room 9?(type just the numbers ex: 7) ").strip()
     if next_room == "3": room_3()
     elif next_room == "7": room_7()
+    elif next_room == "9": room_9()
 
 def room_7():
     print("The tunnel bends sharply to the left, narrowing until you have to press your shoulder against the " 
@@ -325,21 +324,13 @@ def room_9():
      "breath comes in shallow bursts as the walls close in, then suddenly open into a cavern so vast it feels " 
      "like the heart of the earth itself. The ceiling disappears into shadow, and the ground trembles faintly " 
      "beneath your feet. At the center of the chamber, a figure waits—towering, twisted, its form shifting like" 
-     " smoke and stone. Its eyes burn with a light that pierces straight into your wound, making your head " 
-     "throb violently.You stagger forward, clutching the photograph, and the creature lets out a sound that is " 
-     "neither roar nor whisper but something in between—an echo of your own fear. The battle begins. (after the" 
-     " main boss dies)You dodge its strikes, each one shaking the cavern walls, and fight back with everything " 
-     "you can muster. The cave itself seems to join the struggle: stones fall, water surges from cracks, and " 
-     "the glowing veins in the walls pulse with each clashThe fight is brutal, but as you press on, flashes of " 
-     "memory begin to break through the pain (flash back).Finally, with one last desperate blow, the creature " 
-     "collapses, dissolving into mist that vanishes into the cavern walls. Silence falls, heavy and absolute. " 
-     "You drop to your knees, exhausted, clutching the photograph. But now you understand—the little girl in " 
+     " smoke and stone.")
+    fight_main_boss()
+    print("You drop to your knees, exhausted, clutching the photograph. But now you understand—the little girl in " 
      "the picture is you. The family is yours. The cave, the blood, the confusion… All of it was a trial, a " 
      "barrier between you and the truth of who you are.Tears sting your eyes as the memories flood back in full." 
      " You are not lost. You are not alone. This is your family, your life, and you have found your way back to " 
      "it.")
-    fight_main_boss()
-    flashback()
 
 def flashback():
     print("There was once a happy family living on this mountain called Lugh. And in that family there was a " 
@@ -378,15 +369,15 @@ def game():
     room_2()
     fight_phantoms()
     room_3()
-    fight_soldier_room3()   # ✅ fixed
+    fight_soldier_room3()   
     room_4()
-    fight_soldier_room3()   # or fight_soldier_room5() depending on story
+    fight_soldier_room3()   
     room_5()
-    fight_soldier_room5()   # ✅ fixed
+    fight_soldier_room5()   
     room_6()
-    fight_soldier_room6()   # ✅ fixed
+    fight_soldier_room6()   
     room_7()
-    fight_soldier_room7()   # ✅ fixed
+    fight_soldier_room7()   
     room_8()
     room_9()
     fight_main_boss()

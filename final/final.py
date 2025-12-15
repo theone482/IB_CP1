@@ -2,34 +2,48 @@
 
 import random
 
-
-player_health = 1000
-player_strength = random.randint(75, 150)
+# --- Player Stats (buffed for balance) ---
+player_health = 1500   # Increased health
+player_strength = random.randint(150, 250)  # Stronger attacks
 player_memory = 10
 player_agility = 25
 player_speed = 35
 
+# --- Enemy Stats (toned down) ---
 phantom_health = 200
-phantom_attack = 250
+phantom_attack = 150   # Lowered attack
 
 soldier3_health = 50
-soldier3_attack = random.randint(100, 200)
+soldier3_attack = random.randint(75, 125)
+
 soldier5_health = 50
-soldier5_attack = random.randint(100, 200)
+soldier5_attack = random.randint(75, 125)
 
 soldier6_health = 700
-soldier6_attack = random.randint(150, 250)
+soldier6_attack = random.randint(100, 175)
 
-mainboss_health = 27500
-mainboss_attack = random.randint(400, 600)
+mainboss_health = 15000   # Lowered boss health
+mainboss_attack = random.randint(300, 450)
 
-
+# --- Chest Rewards ---
 chests = {
     "room3": {"health": 1000},
     "room5": {"attack": 100},
     "room6": {"health": 200},
     "room7": {"random": [{"attack": 100}, {"health": 1000}]}
 }
+
+def intro_instructions():
+    print("\n--- Welcome to Rosie’s Journey ---")
+    print("Instructions:")
+    print("1. Attack: Damage is RANDOM between 75 and your Strength.")
+    print("2. Heal: Restores +25 HP each time.")
+    print("3. Flee: 50% chance to escape.")
+    print("4. Chest Rewards: Boost Health or Strength depending on the chest.")
+    print("5. If you die, the game ends. Restart to try again.")
+    print("6. You can revisit earlier rooms at any time.")
+    print("7. Room directions will be explained (e.g., Room 3 is right of Room 4).")
+    print("----------------------------------\n")
 
 def player_stats():
     print(f"\n--- Player Stats ---")
@@ -46,20 +60,22 @@ def reset_stats(reward=None):
     if reward:
         if "health" in reward:
             player_health += reward["health"]
+            print(f"You gained +{reward['health']} health!")
         if "attack" in reward:
             player_strength += reward["attack"]
+            print(f"You gained +{reward['attack']} strength!")
 
 def fight_enemy(enemy_name, enemy_health, enemy_attack, reward=None):
     global player_health, player_strength
     print(f"\nYou encounter a {enemy_name}!")
     while player_health > 0 and enemy_health > 0:
-        choice = input("Choose action: (1) Attack (2) Heal (+9 HP) (3) Flee: ").strip()
+        choice = input("Choose action: (1) Attack (2) Heal (+25 HP) (3) Flee: ").strip()
         if choice == "1":
             damage = random.randint(75, player_strength)
             enemy_health -= damage
             print(f"You hit the {enemy_name} for {damage} damage! Enemy health: {enemy_health}")
         elif choice == "2":
-            player_health += 9
+            player_health += 25
             print(f"You healed! Health: {player_health}")
         elif choice == "3":
             if random.randint(1, 100) <= 50:
@@ -72,15 +88,18 @@ def fight_enemy(enemy_name, enemy_health, enemy_attack, reward=None):
             dmg = random.randint(50, enemy_attack)
             player_health -= dmg
             print(f"{enemy_name} hits you for {dmg}! Your health: {player_health}")
+    
     if player_health <= 0:
-        print("You died. Restart to play again.")
+        print("You died. Game Over. Restart to play again.")
+        exit()  # End game immediately
     else:
-        print(f" {enemy_name} defeated!")
+        print(f"{enemy_name} defeated!")
         if reward:
             reset_stats(reward)
             print("You gained a chest reward!")
         player_stats()
 
+# --- Enemy fight wrappers (same names preserved) ---
 def fight_phantoms():
     fight_enemy("Phantom", phantom_health, phantom_attack)
 
@@ -102,17 +121,15 @@ def fight_main_boss():
     if player_health > 0:
         flashback()
 
+# --- Rooms (same names preserved, cave choice fixed) ---
 def room_1():
-    print("You wake up by the river and notice there is a family fish nimbling your finger." 
-    " You jump up from the weird sensation. You look down at the family of fish as you feel a sense of sadness. " 
-    "You feel like you have to go home but you don't remember anything. When you walk away, your head starts to hurt as you " 
-    "touch it and feel a cut and some dry blood on your scalp and forehead. She looked around and saw nothing so " 
-    "she looked in her pocket and found a picture of a family she didn't know but the little girl in it looked like her. " 
-    "As you walk up the river bank you notice a cave. You can't help but wonder what is inside so you go inside.")
-    choice = input("Do you want to enter the cave? (yes/no): ")
-    if choice.lower() == "yes":
-        room_2()
-
+    print("You wake up by the river... You notice a cave nearby.")
+    choice = ""
+    while choice.lower() != "yes":
+        choice = input("Do you want to enter the cave? (yes/no): ")
+        if choice.lower() == "no":
+            print("You feel drawn to the cave... you must enter to continue.")
+    room_2()
 def room_2():
     print("Each step echoed faintly against the stone, the sound swallowed quickly by the heavy silence inside. " 
         "The walls glistened with moisture, and faint trickles of water ran down into shallow pools that reflected your " 
@@ -344,27 +361,35 @@ def flashback():
      "river. As she heard horse running and her aunt and her brothers  running and the soldiers yelling where " 
      "did they go. As her eyes closed and everything went black.")
 
+def training_room():
+    print("\n--- Training Room ---")
+    print("Here you learn how combat works and chest rewards:")
+    print("- Attack is random between 75 and your Strength.")
+    print("- Healing restores +25 HP.")
+    print("- Chest rewards can boost Health or Strength.")
+    print("You feel prepared to continue your journey.\n")
+
+
 def game():
-    print("Welcome to Rosie’s Journey! ")
+    intro_instructions()
     player_stats()
+    training_room()
     room_1()
     room_2()
     fight_phantoms()
     room_3()
-    fight_soldier_room3_5()
+    fight_soldier_room3()   # ✅ fixed
     room_4()
-    fight_soldier_room3_5()
+    fight_soldier_room3()   # or fight_soldier_room5() depending on story
     room_5()
-    fight_soldier_room3_5()
+    fight_soldier_room5()   # ✅ fixed
     room_6()
-    fight_soldier_room6_7()
+    fight_soldier_room6()   # ✅ fixed
     room_7()
-    fight_soldier_room6_7()
+    fight_soldier_room7()   # ✅ fixed
     room_8()
     room_9()
     fight_main_boss()
     print("Game complete! Thanks for playing.")
 
-
 game()
-

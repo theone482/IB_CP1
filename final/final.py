@@ -22,7 +22,7 @@ soldier5_attack = random.randint(75, 125)
 soldier6_health = 700
 soldier6_attack = random.randint(100, 175)
 
-mainboss_health = 1500   # Lowered boss health
+mainboss_health = 1470   # Lowered boss health
 mainboss_attack = random.randint(250, 350)
 
 # --- Chest Rewards ---

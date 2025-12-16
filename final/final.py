@@ -131,12 +131,19 @@ def fight_main_boss():
 
 # --- Rooms (same names preserved, cave choice fixed) ---
 def room_1():
-    print("You wake up by the river... You notice a cave nearby.")
+    print("You wake up by the river and notice there is a family fish nimbling your finger. You jump up from " \
+    "the weird sensation. You look down at the family of fish as you feel a sense of sadness. You feel like you" \
+    " have to go home but you don't remember anything. When you walk away, your head starts to hurt as you " \
+    "touch it and feel a cut and some dry blood on your scalp and forehead. you looked around and saw nothing " \
+    "so she looked in her pocket and found a picture of a family she didn't know but the little girl in it " \
+    "looked like her. As you walk up the river bank you notice a cave. You can't help but wonder what is inside" \
+    " so you go inside..")
     choice = ""
     while choice.lower() != "yes":
         choice = input("Do you want to enter the cave? (yes/no): ")
         if choice.lower() == "no":
-            print("You feel drawn to the cave... you must enter to continue.")
+            print("you walks up and down the river bank wondering what is in that cave. So when you walks to the " \
+            "entrance and feels drawn to it.You feel drawn to the cave... you must enter to continue.")
     room_2()
 
 def room_2():

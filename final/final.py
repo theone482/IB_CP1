@@ -69,13 +69,13 @@ def fight_enemy(enemy_name, enemy_health, enemy_attack, reward=None):
     global player_health, player_strength
     print(f"\nYou encounter a {enemy_name}!")
     while player_health > 0 and enemy_health > 0:
-        choice = input("Choose action: (1) Attack (2) Heal (+25 HP) (3) Flee: ").strip()
+        choice = input("Choose action: (1) Attack (2) Heal (+100 HP) (3) Flee: ").strip()
         if choice == "1":
             damage = random.randint(75, player_strength)
             enemy_health -= damage
             print(f"You hit the {enemy_name} for {damage} damage! Enemy health: {enemy_health}")
         elif choice == "2":
-            player_health += 25
+            player_health += 100
             print(f"You healed! Health: {player_health}")
         elif choice == "3":
             if random.randint(1, 100) <= 50:
@@ -91,7 +91,7 @@ def fight_enemy(enemy_name, enemy_health, enemy_attack, reward=None):
     
     if player_health <= 0:
         print("You died. Game Over. Restart to play again.")
-        exit()  # End game immediately
+        return  # ✅ clean exit
     else:
         print(f"{enemy_name} defeated!")
         if reward:
@@ -366,21 +366,7 @@ def game():
     player_stats()
     training_room()
     room_1()
-    room_2()
-    fight_phantoms()
-    room_3()
-    fight_soldier_room3()   
-    room_4()
-    fight_soldier_room3()   
-    room_5()
-    fight_soldier_room5()   
-    room_6()
-    fight_soldier_room6()   
-    room_7()
-    fight_soldier_room7()   
-    room_8()
-    room_9()
-    fight_main_boss()
     print("Game complete! Thanks for playing.")
+    
 
 game()
